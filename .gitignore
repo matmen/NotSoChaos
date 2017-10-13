@@ -1,0 +1,7 @@
+npm-debug.log*
+package-lock.json
+node_modules/
+.npm
+.eslintcache
+.node_repl_history
+.env
