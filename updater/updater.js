@@ -54,7 +54,7 @@ class Updater {
 						merge_method: 'squash'
 					});
 
-					await this.github.pullRequests.createComment({
+					await this.github.pullRequests.createCommentReply({
 						owner: gitConfig.owner,
 						repo: gitConfig.repo,
 						number: pullRequest.number,
