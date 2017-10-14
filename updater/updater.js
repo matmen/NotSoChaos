@@ -69,7 +69,7 @@ class Updater {
 			} else if (this.isOutdated(Date.parse(pullRequest.created_at).valueOf())) {
 				console.log(`[GIT] Closing "${pullRequest.title}" (${approved}/${unapproved})`);
 
-				await this.github.pullRequests.createComment({
+				await this.github.issues.createComment({
 					owner: gitConfig.owner,
 					repo: gitConfig.repo,
 					number: pullRequest.number,
