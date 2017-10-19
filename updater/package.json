@@ -1,22 +1,22 @@
 {
-  "name": "notsochaos-updater",
-  "version": "1.0.0",
-  "description": "The auto-updater for NotSoChaos",
-  "main": "updater.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/xmatmen/NotSoChaos.git"
-  },
-  "author": "matmen",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/xmatmen/NotSoChaos/issues"
-  },
-  "homepage": "https://github.com/xmatmen/NotSoChaos#readme",
-  "dependencies": {
-    "github": "^11.0.0"
-  }
+	"name": "notsochaos-updater",
+	"version": "1.0.0",
+	"description": "The auto-updater for NotSoChaos",
+	"main": "updater.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/xmatmen/NotSoChaos.git"
+	},
+	"author": "matmen",
+	"license": "GPL-3.0",
+	"bugs": {
+		"url": "https://github.com/xmatmen/NotSoChaos/issues"
+	},
+	"homepage": "https://github.com/xmatmen/NotSoChaos#readme",
+	"dependencies": {
+		"github": "^11.0.0"
+	}
 }

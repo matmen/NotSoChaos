@@ -32,6 +32,13 @@ class Updater {
 		let changed = false;
 
 		for (const pullRequest of pullRequests.data) {
+			if (/^(\[|\()?WIP:?(\]|\))?|(\[|\()WIP(\]|\))$/i.test(pullRequest.title)) continue; // Don't check the PR if it's WIP
+
+			const createdAt = Date.parse(pullRequest.created_at).valueOf();
+			const updatedAt = Date.parse(pullRequest.updated_at).valueOf();
+			if (Date.now() - createdAt < 10 * 60 * 60 * 1000) continue; // Don't check the PR if its not older than 10h
+			if (Date.now() - updatedAt < 60 * 60 * 1000) continue; // Don't check the PR if it's been updated in the last hour
+
 			const reviews = await this.github.pullRequests.getReviews({
 				owner: gitConfig.owner,
 				repo: gitConfig.repo,
@@ -40,9 +47,10 @@ class Updater {
 
 			const approved = reviews.data.filter(review => review.state === 'APPROVED').length;
 			const unapproved = reviews.data.filter(review => review.state === 'REQUEST_CHANGES').length;
+			const total = approved + unapproved;
 
 			if (this.shouldMerge(approved, unapproved)) {
-				console.log(`[GIT] Merging "${pullRequest.title}" (${approved}/${unapproved})`);
+				console.log(`[GIT] Merging "${pullRequest.title}"`);
 
 				try {
 					await this.github.pullRequests.merge({
@@ -50,7 +58,7 @@ class Updater {
 						repo: gitConfig.repo,
 						number: pullRequest.number,
 						commit_title: `Auto-Merge: "${pullRequest.title}"`,
-						commit_message: `Approval rate: ${approved}/${reviews.data.length} (${Math.round(approved / reviews.data.length * 10000) / 100}%)`,
+						commit_message: `Approval rate: ${approved}/${total} (${Math.round(approved / total * 10000) / 100}%)`,
 						merge_method: 'squash'
 					});
 
@@ -58,7 +66,7 @@ class Updater {
 						owner: gitConfig.owner,
 						repo: gitConfig.repo,
 						number: pullRequest.number,
-						body: `Merged.\nApproval rate: ${approved}/${reviews.data.length} (${Math.round(approved / reviews.data.length * 10000) / 100}%)`
+						body: `Merged.\nApproval rate: ${approved}/${total} (${Math.round(approved / total * 10000) / 100}%)`
 					});
 
 					changed = true;
@@ -66,21 +74,21 @@ class Updater {
 					console.log(`[GIT] Failed to merge "${pullRequest.title}" (${err})`);
 				}
 
-			} else if (this.isOutdated(Date.parse(pullRequest.created_at).valueOf())) {
-				console.log(`[GIT] Closing "${pullRequest.title}" (${approved}/${unapproved})`);
-
-				await this.github.issues.createComment({
-					owner: gitConfig.owner,
-					repo: gitConfig.repo,
-					number: pullRequest.number,
-					body: 'Not enough votes, closing'
-				});
+			} else if (this.isOutdated(createdAt, updatedAt)) {
+				console.log(`[GIT] Closing "${pullRequest.title}"`);
 
 				await this.github.pullRequests.update({
 					owner: gitConfig.owner,
 					repo: gitConfig.repo,
 					number: pullRequest.number,
 					state: 'closed'
+				});
+
+				await this.github.issues.createComment({
+					owner: gitConfig.owner,
+					repo: gitConfig.repo,
+					number: pullRequest.number,
+					body: 'Not enough approval, closing'
 				});
 			}
 		}
@@ -98,16 +106,16 @@ class Updater {
 	and there are more than two approved reviews
 	*/
 	shouldMerge(approved, unapproved) {
-		return approved > unapproved * 2 && approved > 2;
+		return approved > unapproved * 2 && approved >= 3;
 	}
 
 	/*
 	Checks if the PR is outdated
 
-	Return true if PR is older than 3 days
+	Return true if PR is older than 3 days and hasn't been updated in the last 24h
 	*/
-	isOutdated(timeCreated) {
-		return Date.now() - timeCreated > 3 * 24 * 60 * 60 * 1000;
+	isOutdated(timeCreated, timeUpdated) {
+		return (Date.now() - timeCreated > 3 * 24 * 60 * 60 * 1000) && (Date.now() - timeUpdated > 24 * 60 * 60 * 1000);
 	}
 
 }
