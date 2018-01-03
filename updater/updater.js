@@ -32,7 +32,7 @@ class Updater {
 		let changed = false;
 
 		for (const pullRequest of pullRequests.data) {
-			if (/^(\[|\()?WIP:?(\]|\))?|(\[|\()WIP(\]|\))$/i.test(pullRequest.title)) continue; // Don't check the PR if it's WIP
+			if (/(^|\W)WIP(\W|$)/i.test(pullRequest.title)) continue; // Don't check the PR if it's WIP
 
 			const createdAt = Date.parse(pullRequest.created_at).valueOf();
 			const updatedAt = Date.parse(pullRequest.updated_at).valueOf();
@@ -103,7 +103,7 @@ class Updater {
 	Checks if the PR should be merged
 
 	Return true if there amount of approved reviews is more than double the amount of unapproved reviews
-	and there are more than two approved reviews
+	and there are more than three approved reviews
 	*/
 	shouldMerge(approved, unapproved) {
 		return approved > unapproved * 2 && approved >= 3;
