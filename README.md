@@ -1,5 +1,5 @@
 # NotSoChaos
-[![Discord Bade](https://discordapp.com/api/guilds/365993670719045643/embed.png)](https://discord.gg/ajJkJTx) ![Issues](https://img.shields.io/github/issues/xmatmen/NotSoChaos.svg) ![Forks](https://img.shields.io/github/forks/xmatmen/NotSoChaos.svg) ![Stars](https://img.shields.io/github/stars/xmatmen/NotSoChaos.svg)
+[![Discord Badge](https://discordapp.com/api/guilds/178313653177548800/embed.png)](https://discord.gg/9Ukuw9V) ![Issues](https://img.shields.io/github/issues/xmatmen/NotSoChaos.svg) ![Forks](https://img.shields.io/github/forks/xmatmen/NotSoChaos.svg) ![Stars](https://img.shields.io/github/stars/xmatmen/NotSoChaos.svg)
 
 **NotSoChaos** is a project that automatically updates its own code democratically. This means that anyone can easily add new features or edit existing ones.
 
