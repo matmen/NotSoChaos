@@ -103,7 +103,7 @@ class Updater {
 	Checks if the PR should be merged
 
 	Return true if there amount of approved reviews is more than double the amount of unapproved reviews
-	and there are more than three approved reviews
+	and there are more than two approved reviews
 	*/
 	shouldMerge(approved, unapproved) {
 		return approved > unapproved * 2 && approved >= 3;
