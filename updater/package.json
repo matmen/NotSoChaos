@@ -8,14 +8,14 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/xmatmen/NotSoChaos.git"
+		"url": "git+https://github.com/matmen/NotSoChaos.git"
 	},
 	"author": "matmen",
 	"license": "GPL-3.0",
 	"bugs": {
-		"url": "https://github.com/xmatmen/NotSoChaos/issues"
+		"url": "https://github.com/matmen/NotSoChaos/issues"
 	},
-	"homepage": "https://github.com/xmatmen/NotSoChaos#readme",
+	"homepage": "https://github.com/matmen/NotSoChaos#readme",
 	"dependencies": {
 		"github": "^11.0.0"
 	}

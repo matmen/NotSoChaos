@@ -5,7 +5,7 @@
 
 ## How it works
 1. Fork the project and make changes to the code
-2. Push the changes to your repository and [open a pull request](https://github.com/xmatmen/NotSoChaos/compare)
+2. Push the changes to your repository and [open a pull request](https://github.com/matmen/NotSoChaos/compare)
 3. Wait for people to vote on your PR
 4. If enough people voted for your PR, it will automatically be merged and the bot will update itself
 
@@ -17,4 +17,4 @@ You can vote on a PR by going to its `Files changed` tab, clicking `Review chang
 This is really up to you. Anyone can add, edit or remove features. There is no exact purpose.
 
 ## Server details
-NotSoChaos runs on a Debian 9 server with access to [`NodeJS`](https://nodejs.org/), [`Python 3.6`](https://www.python.org/) and [`PostgreSQL`](https://www.postgresql.org/), although more packages can be installed
+NotSoChaos runs on a Debian 9 server with access to [`NodeJS`](https://nodejs.org/) and [`Python 3.6`](https://www.python.org/), although more packages can be installed
