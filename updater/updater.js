@@ -32,7 +32,7 @@ class Updater {
 		let changed = false;
 
 		for (const pullRequest of pullRequests.data) {
-			if (/^|[^'"\w]WIP[^'"\w]|$/i.test(pullRequest.title)) continue; // Don't check the PR if it's WIP
+			if (/(^|[^'"\w])WIP([^'"\w]|$)/i.test(pullRequest.title)) continue; // Don't check the PR if it's WIP
 
 			const createdAt = Date.parse(pullRequest.created_at).valueOf();
 			const updatedAt = Date.parse(pullRequest.updated_at).valueOf();
