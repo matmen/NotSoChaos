@@ -11,7 +11,7 @@
 
 ## Voting
 You can vote on a PR by going to its `Files changed` tab, clicking `Review changes` in the top right, and either choosing `Approve` (to vote for it) or `Request changes` (to vote against it)
-![Tutorial showing how to vote](.guthub/how_to_vote.png)
+![Tutorial showing how to vote](.github/how_to_vote.png)
 
 ## What does this do?
 This is really up to you. Anyone can add, edit or remove features. There is no exact purpose.
